@@ -281,22 +281,23 @@ client.on("interactionCreate", async interaction => {
       const s = await findServerForUser(email, selector);
       if (!s) return interaction.editReply("Server not found. Use `/servers` to see the owner's servers.");
 
-      await panel.delete(`/servers/${s.id}`);
-      return interaction.editReply(
-  `🗑️ Deleted ${s.name} (${s.identifier}) for ${email}.`
-);
-    if (cmd === "server-reinstall") {
-      const email = interaction.options.getString("email");
-      const selector = interaction.options.getString("server");
-      const s = await findServerForUser(email, selector);
-      if (!s) return interaction.editReply("Server not found. Use `/servers` to see the owner's servers.");
+      if (cmd === "server-delete" || cmd === "delete") {
+   ...
+   return interaction.editReply(
+     `🗑️ Deleted ${s.name} (${s.identifier}) for ${email}.`
+   );
+}
 
-      await panel.post(`/servers/${s.id}/reinstall`);
-      return interaction.editReply(
-  `♻️ Reinstall started for ${s.name} (${s.identifier}).`
-);
+if (cmd === "server-reinstall") {
+   ...
+   return interaction.editReply(
+     `♻️ Reinstall started for ${s.name} (${s.identifier}).`
+   );
+}
 
-    if (cmd === "servers") {
+if (cmd === "servers") {
+   ...
+}
       const email = interaction.options.getString("email");
       const user = await getUserByEmail(email);
       if (!user) return interaction.editReply(`No user found for **${email}**.`);
