@@ -282,9 +282,9 @@ client.on("interactionCreate", async interaction => {
       if (!s) return interaction.editReply("Server not found. Use `/servers` to see the owner's servers.");
 
       await panel.delete(`/servers/${s.id}`);
-      return interaction.editReply(`🗑️ Deleted **${s.name}** (`${s.identifier}`) for **${email}**.`);
-    }
-
+      return interaction.editReply(
+  `🗑️ Deleted ${s.name} (${s.identifier}) for ${email}.`
+);
     if (cmd === "server-reinstall") {
       const email = interaction.options.getString("email");
       const selector = interaction.options.getString("server");
@@ -292,8 +292,9 @@ client.on("interactionCreate", async interaction => {
       if (!s) return interaction.editReply("Server not found. Use `/servers` to see the owner's servers.");
 
       await panel.post(`/servers/${s.id}/reinstall`);
-      return interaction.editReply(`♻️ Reinstall started for **${s.name}** (`${s.identifier}`).`);
-    }
+      return interaction.editReply(
+  `♻️ Reinstall started for ${s.name} (${s.identifier}).`
+);
 
     if (cmd === "servers") {
       const email = interaction.options.getString("email");
